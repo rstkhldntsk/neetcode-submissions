@@ -1,0 +1,27 @@
+func search(nums []int, target int) int {
+	l, r := 0, len(nums)-1
+	for l <= r {
+		m := l + (r-l)/2
+		if nums[m] == target {
+			return m
+		}
+		
+		leftSorted := nums[l] <= nums[m]
+		if leftSorted {
+			targetInLeft := nums[l] <= target && target < nums[m]
+			if targetInLeft {
+				r = m - 1
+			} else {
+				l = m + 1
+			}
+		} else if nums[m] <= nums[r] {
+			targetInRight := nums[m] < target && target <= nums[r]
+			if targetInRight {
+				l = m + 1
+			} else {
+				r = m - 1
+			}
+		}
+	}
+	return -1
+}
