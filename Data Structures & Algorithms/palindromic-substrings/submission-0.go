@@ -1,0 +1,18 @@
+func countSubstrings(s string) int {
+	res := 0
+	for i := range s {
+		l, r := i, i
+		for l >= 0 && r < len(s) && s[l] == s[r] {
+			l--
+			r++
+			res++
+		}
+		l, r = i, i+1
+		for l >= 0 && r < len(s) && s[l] == s[r] {
+			l--
+			r++
+			res++
+		}
+	}
+	return res
+}
